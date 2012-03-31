@@ -14,11 +14,14 @@
 @synthesize topPlaces = _topPlaces;
 
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        
+
     }
     return self;
 }
@@ -43,7 +46,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    
+    // initialize model
+    PlacesModel * model = [[ PlacesModel alloc] init];
+    self.topPlaces = model;
     [ self.topPlaces loadFromFlickr ];
     
 }
@@ -85,29 +90,30 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return [ self.topPlaces getNumPlaces ];
+    return 10; //[ self.topPlaces getNumPlaces ];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PlaceCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    [cell setText:@"foobar" ];
+    
+    cell.textLabel.text = [ self.topPlaces getPlaceName:indexPath.row ];
+    cell.detailTextLabel.text = [ self.topPlaces getLongPlaceName:indexPath.row ];
+    
     
     return cell;
 }

@@ -98,7 +98,7 @@
 {
 
     // Return the number of rows in the section.
-    return 10; //[ self.topPlaces getNumPlaces ];
+    return [ self.topPlaces getNumPlaces ];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,12 +109,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    
+        
     cell.textLabel.text = [ self.topPlaces getPlaceName:indexPath.row ];
-    cell.detailTextLabel.text = [ self.topPlaces getLongPlaceName:indexPath.row ];
-    
-    
+    cell.detailTextLabel.text = [ self.topPlaces getPlaceDetails:indexPath.row ];
     return cell;
 }
 

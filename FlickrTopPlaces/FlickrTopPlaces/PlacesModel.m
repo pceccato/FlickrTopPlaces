@@ -9,7 +9,32 @@
 #import "PlacesModel.h"
 #import "FlickrFetcher.h"
 
+
+//
+// private properties go in here
+//
+@interface PlacesModel ()
+@property (nonatomic,weak) NSArray* sortedPlaces;
+@property (nonatomic,weak) NSArray* topPlaces;
+@end
+
+//
+// this is used for our alphabetically sorted list of places
+//
+@interface PlaceDetail : NSObject
+@property (nonatomic,weak) NSString* place;
+@property (nonatomic,weak) NSString* details;
+@end
+
+
+@implementation PlaceDetail
+@synthesize place = _place;
+@synthesize details = _details;
+@end
+
 @implementation PlacesModel
+
+@synthesize sortedPlaces = _sortedPlaces;
 
 @synthesize topPlaces = _topPlaces;
 
@@ -27,9 +52,55 @@
 
 - (void) getTopPlacesFromFlickr
 {
+    //
+    // make request to flickr
+    //
     _topPlaces = [ FlickrFetcher topPlaces ];
-    [ self logFlickrResponse ];
+
     
+    //
+    // now parse the place names and place details and put it into an array sorted by alphabetical order
+    //
+    NSMutableArray * places = [[ NSMutableArray alloc] init ];
+    for(NSDictionary* place in _topPlaces)
+    {
+        //
+        // place details are found under the content key
+        // TODO: could we parse place_url instead?
+        //
+        NSString* unparsedName = [place objectForKey:@"_content"];
+        
+        //
+        // parse the name into place and details by splitting at the first comma found
+        //
+        NSRange searchRange;
+        searchRange.location=(unsigned int)',';
+        searchRange.length=1;
+        NSRange foundRange = [unparsedName rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
+        
+        PlaceDetail* d = [[PlaceDetail alloc] init];
+        d.place = [unparsedName substringToIndex:foundRange.location]; // string up to the first comma
+        d.details = [unparsedName substringFromIndex:foundRange.location + 2]; // string up to the first comma
+        
+        //
+        // put it into our temporary array
+        //
+        [places addObject:d];
+    }
+        
+    //
+    // now sort the array by place name
+    //
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"place" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    self.sortedPlaces = [places sortedArrayUsingDescriptors:sortDescriptors];
+    
+    //
+    // log it
+    //
+    [ self logFlickrResponse ];
+        
 }
 
 - (void) loadFromFlickr
@@ -39,38 +110,35 @@
 
 -(int) getNumPlaces
 {
-    return [ self.topPlaces count ];
+    return [ self.sortedPlaces count ];
 }
 
+//
+// get the place name, usually its the first field separated by a comma
+//
 -(NSString*) getPlaceName: (int) atIndex
 {
-    NSString* longName = [self getLongPlaceName:atIndex ];
-    
-    // find first comma
-    NSRange searchRange;
-    searchRange.location=(unsigned int)',';
-    searchRange.length=1;
-    NSRange foundRange = [longName rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
-    
-    return [longName substringToIndex:foundRange.location]; // return string up to the first comma
-    
-}
-
--(NSString*) getLongPlaceName: (int) atIndex
-{
-    NSString* name = @"";
+    NSString* str = @"";
     if( atIndex < self.getNumPlaces )
     {
-        NSDictionary* place = [ self.topPlaces objectAtIndex:atIndex ];
-        name = [place objectForKey:@"_content"]; 
-        
-
-
-        
-
+       PlaceDetail* d = [ self.sortedPlaces objectAtIndex:atIndex ];
+       str = d.place;
     }
-    
-    return name;
+    return str;
+}
+
+//
+// the remaining place details found AFTER the first comma
+//
+-(NSString*) getPlaceDetails: (int) atIndex
+{
+    NSString* str = @"";
+    if( atIndex < self.getNumPlaces )
+    {
+        PlaceDetail* d = [ self.sortedPlaces objectAtIndex:atIndex ];
+        str = d.details;
+    }
+    return str;    
 }
 
 

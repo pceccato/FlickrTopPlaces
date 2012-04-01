@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface PlacesModel : NSObject
-@property (nonatomic,weak) NSArray* topPlaces;
+
+
 -(void) loadFromFlickr;
 -(int) getNumPlaces;
 -(NSString*) getPlaceName: (int) atIndex;
--(NSString*) getLongPlaceName: (int) atIndex;
-
+-(NSString*) getPlaceDetails: (int) atIndex;
 
 
 

@@ -11,6 +11,6 @@
 
 @interface PlacesTableViewController : UITableViewController
 
-@property (nonatomic,weak) PlacesModel* topPlaces;
+@property (nonatomic,strong) PlacesModel* topPlaces;
 
 @end

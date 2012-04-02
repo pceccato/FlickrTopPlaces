@@ -14,16 +14,16 @@
 // private properties go in here
 //
 @interface PlacesModel ()
-@property (nonatomic,weak) NSArray* sortedPlaces;
-@property (nonatomic,weak) NSArray* topPlaces;
+@property (nonatomic,strong) NSArray* sortedPlaces;
+@property (nonatomic,strong) NSArray* topPlaces;
 @end
 
 //
 // this is used for our alphabetically sorted list of places
 //
 @interface PlaceDetail : NSObject
-@property (nonatomic,weak) NSString* place;
-@property (nonatomic,weak) NSString* details;
+@property (nonatomic,strong) NSString* place;
+@property (nonatomic,strong) NSString* details;
 @end
 
 

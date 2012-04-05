@@ -34,6 +34,25 @@
 
 #pragma mark - View lifecycle
 
+//
+// initialize contents of tableview from a background thread
+- (void) loadTopPlaces
+{
+    //
+    // do the blocking IO in a thread like so
+    //
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL );
+    dispatch_async(downloadQueue, ^{
+        [ self.topPlaces loadFromFlickr ]; 
+        //
+        // anything which updates the UI can only be doen from main thread
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [ self.tableView reloadData ];
+        });
+    });
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,9 +66,13 @@
     // initialize model
     PlacesModel * model = [[ PlacesModel alloc] init];
     self.topPlaces = model;
-    [ self.topPlaces loadFromFlickr ];
-    
+    //
+    // load data from flickr
+    //
+    [ self loadTopPlaces ];
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -105,45 +128,6 @@
     cell.detailTextLabel.text = [ self.topPlaces getPlaceDetails:indexPath.row ];
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

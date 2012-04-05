@@ -66,9 +66,8 @@
     {
         //
         // place details are found under the content key
-        // TODO: could we parse place_url instead?
         //
-        NSString* unparsedName = [place objectForKey:@"_content"];
+        NSString* unparsedName = [place objectForKey:FLICKR_PLACE_NAME];
         
         //
         // parse the name into place and details by splitting at the first comma found

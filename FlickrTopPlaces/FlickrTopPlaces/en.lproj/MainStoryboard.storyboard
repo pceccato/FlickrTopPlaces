@@ -83,7 +83,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" badgeValue="Places" id="ERp-O0-b2b"/>
+                    <tabBarItem key="tabBarItem" title="Places" id="ERp-O0-b2b"/>
                     <connections>
                         <outlet property="view" destination="LqF-zA-FDx" id="H70-zS-ioL"/>
                     </connections>

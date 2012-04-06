@@ -13,8 +13,10 @@
 
 -(void) loadFromFlickr;
 -(int) getNumPlaces;
+
 -(NSString*) getPlaceName: (int) atIndex;
 -(NSString*) getPlaceDetails: (int) atIndex;
+-(NSDictionary*) getPlaceParams: (int) atIndex;
 
 
 

@@ -22,14 +22,16 @@
 // this is used for our alphabetically sorted list of places
 //
 @interface PlaceDetail : NSObject
-@property (nonatomic,strong) NSString* place;
+@property (nonatomic,strong) NSString* name;
 @property (nonatomic,strong) NSString* details;
+@property (nonatomic,weak) NSDictionary* params;
 @end
 
 
 @implementation PlaceDetail
-@synthesize place = _place;
+@synthesize name = _name;
 @synthesize details = _details;
+@synthesize params = _params;
 @end
 
 @implementation PlacesModel
@@ -78,8 +80,9 @@
         NSRange foundRange = [unparsedName rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
         
         PlaceDetail* d = [[PlaceDetail alloc] init];
-        d.place = [unparsedName substringToIndex:foundRange.location]; // string up to the first comma
+        d.name = [unparsedName substringToIndex:foundRange.location]; // string up to the first comma
         d.details = [unparsedName substringFromIndex:foundRange.location + 2]; // string up to the first comma
+        d.params = place;
         
         //
         // put it into our temporary array
@@ -91,7 +94,7 @@
     // now sort the array by place name
     //
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"place" ascending:YES];
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     self.sortedPlaces = [places sortedArrayUsingDescriptors:sortDescriptors];
     
@@ -112,33 +115,36 @@
     return [ self.sortedPlaces count ];
 }
 
+-(PlaceDetail*) getPlace: (int) atIndex
+{
+    PlaceDetail* d = nil;
+    if( atIndex < self.getNumPlaces )
+    {
+        d =  [ self.sortedPlaces objectAtIndex:atIndex ];
+    }
+    return d; 
+}
+
 //
 // get the place name, usually its the first field separated by a comma
 //
 -(NSString*) getPlaceName: (int) atIndex
 {
-    NSString* str = @"";
-    if( atIndex < self.getNumPlaces )
-    {
-       PlaceDetail* d = [ self.sortedPlaces objectAtIndex:atIndex ];
-       str = d.place;
-    }
-    return str;
+    return [self getPlace:atIndex ].name;
 }
+
 
 //
 // the remaining place details found AFTER the first comma
 //
 -(NSString*) getPlaceDetails: (int) atIndex
 {
-    NSString* str = @"";
-    if( atIndex < self.getNumPlaces )
-    {
-        PlaceDetail* d = [ self.sortedPlaces objectAtIndex:atIndex ];
-        str = d.details;
-    }
-    return str;    
+    return [self getPlace:atIndex ].details;   
 }
 
+-(NSDictionary*) getPlaceParams:(int)atIndex    
+{
+    return [ self getPlace:atIndex ].params;
+}
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "PlacesTableViewController.h"
+#import "PhotosFromPlaceViewController.h"
 
 
 @implementation PlacesTableViewController
@@ -140,6 +141,22 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+
+    if ([[segue identifier] isEqualToString:@"ShowPhotosFromPlace"]) {
+        
+        NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
+        int index = selectedRowIndex.row;
+        
+        //
+        // tell the drill down what place to load the photos for
+        //
+        PhotosFromPlaceViewController *destViewController = [segue destinationViewController];
+        destViewController.place = [self.topPlaces getPlaceParams:index ];
+    }
 }
 
 @end

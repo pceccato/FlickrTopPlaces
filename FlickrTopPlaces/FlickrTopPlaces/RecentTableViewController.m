@@ -10,6 +10,7 @@
 
 
 @implementation RecentTableViewController
+@synthesize recentPhotos = _recentPhotos;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,6 +40,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _recentPhotos = [[PhotosModel alloc] init];
+    
 }
 
 - (void)viewDidUnload
@@ -76,16 +79,10 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
     return 0;
 }

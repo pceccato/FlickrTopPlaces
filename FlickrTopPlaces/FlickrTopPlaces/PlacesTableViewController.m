@@ -37,6 +37,7 @@
 
 //
 // initialize contents of tableview from a background thread
+//
 - (void) loadTopPlaces
 {
     //
@@ -44,12 +45,42 @@
     //
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL );
     dispatch_async(downloadQueue, ^{
-        [ self.topPlaces loadFromFlickr ]; 
+        
         //
-        // anything which updates the UI can only be doen from main thread
+        // first create an activity indicator to give the user some feedback whilst we hit the network
+        // TODO: perhaps this should be part of our class or a common utility base class
+        //
+        UIActivityIndicatorView  *av = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        //av.frame=CGRectMake(145, 160, 25, 25);
+        //av.tag  = 1; // tag to identify the view
+        av.center = self.tableView.center;
+        
+        //
+        // anything which updates the UI can only be done from main thread
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            [self.tableView addSubview:av ];
+            [av startAnimating];
+        });
+        //
+        // now do the network request
+        //
+        [self.topPlaces loadFromFlickr];
+
+        //
+        // refresh tableview then cancel the activity indicator
         //
         dispatch_async(dispatch_get_main_queue(), ^{
             [ self.tableView reloadData ];
+            //
+            // can retrieve view like this
+            //
+            //UIActivityIndicatorView *tmpimg = (UIActivityIndicatorView *)[self.tableView viewWithTag:1];
+            //
+            // but we already have it
+            [av stopAnimating];
+            [av removeFromSuperview];
         });
     });
 }
@@ -110,6 +141,10 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Only one section.
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
@@ -145,8 +180,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-
-    if ([[segue identifier] isEqualToString:@"ShowPhotosFromPlace"]) {
+    NSString* identifier = [segue identifier];
+    if ([identifier isEqualToString:@"ShowPhotosFromPlace"]) {
         
         NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
         int index = selectedRowIndex.row;
@@ -154,7 +189,7 @@
         //
         // tell the drill down what place to load the photos for
         //
-        PhotosFromPlaceViewController *destViewController = [segue destinationViewController];
+        PhotosFromPlaceViewController *destViewController = segue.destinationViewController;
         destViewController.place = [self.topPlaces getPlaceParams:index ];
     }
 }

@@ -19,6 +19,7 @@ const int maxphotos = 40;
 
 //
 // initialize contents of tableview from a background thread
+//
 - (void) loadPhotosForPlace
 {
     //
@@ -26,6 +27,24 @@ const int maxphotos = 40;
     //
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL );
     dispatch_async(downloadQueue, ^{
+        
+        //
+        // first create an activity indicator to give the user some feedback whilst we hit the network
+        // TODO: perhaps this should be part of our class or a common utility base class
+        //
+        UIActivityIndicatorView  *av = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        av.center = self.tableView.center;
+        
+        //
+        // anything which updates the UI can only be done from main thread
+        //
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView addSubview:av ];
+            [av startAnimating];
+        });        
+        
+        
         self.photos = [ FlickrFetcher photosInPlace:self.place maxResults:maxphotos ]; 
                 
         //
@@ -43,6 +62,8 @@ const int maxphotos = 40;
         //
         dispatch_async(dispatch_get_main_queue(), ^{
             [ self.tableView reloadData ];
+            [av stopAnimating];
+            [av removeFromSuperview];
         });
     });
 }
@@ -58,6 +79,11 @@ const int maxphotos = 40;
 }
 
 #pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Only one section.
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

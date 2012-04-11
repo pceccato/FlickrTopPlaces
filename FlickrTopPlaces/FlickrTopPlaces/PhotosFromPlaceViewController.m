@@ -8,6 +8,7 @@
 
 #import "PhotosFromPlaceViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotoViewController.h"
 
 const int maxphotos = 40;
 
@@ -121,6 +122,24 @@ const int maxphotos = 40;
     cell.textLabel.text = title;
     cell.detailTextLabel.text = desc;
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSString* identifier = [segue identifier];
+    if ([identifier isEqualToString:@"ShowPhoto"]) {
+        
+        NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
+        int index = selectedRowIndex.row;
+        
+        //
+        // pass the photo metadata to the photo view
+        //
+        PhotoViewController *destViewController = segue.destinationViewController;
+        NSDictionary* photo = [self.photos objectAtIndex: index];
+        
+        destViewController.photo = photo;
+    }
 }
 
 @end

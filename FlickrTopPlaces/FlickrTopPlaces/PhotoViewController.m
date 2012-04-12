@@ -9,7 +9,7 @@
 #import "PhotoViewController.h"
 #import "FlickrFetcher.h"
 
-@interface PhotoViewController()
+@interface PhotoViewController() <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -20,6 +20,10 @@
 @synthesize scrollView;
 @synthesize photo = _photo;
 
+- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageView;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,7 +82,56 @@
             //
             // set the imageView to show the entire image
             //
-            self.imageView.frame = CGRectMake( 0, 0, self.imageView.image.size.width, self.imageView.image.size.height); 
+            CGRect image = CGRectMake( 0, 0, self.imageView.image.size.width, self.imageView.image.size.height); 
+            self.imageView.frame = image;
+            //
+            // we want to have no unused space so the zoom rect must have the same aspect as the scrollviews frame
+            // so the shortest edge of the image should correspond to longest side of the frame
+            //
+            CGRect frame = self.scrollView.frame;
+            
+            float ratio = 0;
+            float scrollHeight = 0;
+            float scrollWidth = 0;
+            if( frame.size.width > frame.size.height )
+            {
+                // landscape frame
+                ratio = frame.size.height / frame.size.width;
+                if( image.size.width > image.size.height )
+                {
+                    // landscape image
+                    scrollWidth = image.size.width;
+                    scrollHeight = scrollWidth * ratio;
+                }
+                else
+                {
+                    // portrait image
+                    scrollWidth  = image.size.width;
+                    scrollHeight = scrollWidth * ratio;
+                }
+            }
+            else
+            {
+                // portrait frame
+                ratio = frame.size.width / frame.size.height;
+                if( image.size.width > image.size.height )
+                {
+                    // landscape image
+                    scrollHeight = image.size.height;
+                    scrollWidth = scrollHeight * ratio;
+                }
+                else
+                {
+                    // portrait image
+                    scrollWidth  = image.size.width;
+                    scrollHeight = scrollWidth * ratio;
+                }
+            }
+
+            CGRect zoomRect = CGRectMake( 0, 0, scrollWidth, scrollHeight);
+            
+            
+            [self.scrollView zoomToRect:zoomRect  animated:TRUE ];
             
 
             [av stopAnimating];
@@ -97,8 +150,20 @@
     
     [self loadPhoto];
     
-
+    //
+    // hook up the scrolling delegate
+    //
+    self.scrollView.delegate = self;
 }
+
+//
+// do geometry calculations here...
+//
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated ];
+}
+   
 
 
 - (void)viewDidUnload

@@ -163,11 +163,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FlickrTopPlaces/PhotoViewController.m"
-         timestampString = "355849968.066375"
+         timestampString = "355931402.612888"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-loadPhoto"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FlickrTopPlaces/PhotoViewController.m"
+         timestampString = "355935692.667229"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-loadPhoto"
          landmarkType = "5">
       </FileBreakpoint>

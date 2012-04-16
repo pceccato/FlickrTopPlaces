@@ -43,7 +43,7 @@
 - (void) logFlickrResponse
 {
     // see if we got anything back from flickr
-    for (NSDictionary* place in _topPlaces ) {
+    for (NSDictionary* place in self.topPlaces ) {
         for (id key in place ) {
             
             NSLog(@"key: %@, value: %@", key, [place objectForKey:key]);
@@ -57,14 +57,14 @@
     //
     // make request to flickr
     //
-    _topPlaces = [ FlickrFetcher topPlaces ];
+    self.topPlaces = [ FlickrFetcher topPlaces ];
 
     
     //
     // now parse the place names and place details and put it into an array sorted by alphabetical order
     //
     NSMutableArray * places = [[ NSMutableArray alloc] init ];
-    for(NSDictionary* place in _topPlaces)
+    for(NSDictionary* place in self.topPlaces)
     {
         //
         // place details are found under the content key

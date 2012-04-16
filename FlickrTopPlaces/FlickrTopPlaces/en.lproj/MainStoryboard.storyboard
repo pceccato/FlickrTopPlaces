@@ -50,6 +50,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Nq3-cY-SGh"/>
                     <connections>
+                        <outlet property="navBar" destination="Nq3-cY-SGh" id="Vq8-LI-Usx"/>
                         <outlet property="view" destination="KJG-tr-XB1" id="iTQ-sS-Tyk"/>
                     </connections>
                 </tableViewController>
@@ -80,6 +81,7 @@
                     <navigationItem key="navigationItem" id="6Hn-w0-pjA"/>
                     <connections>
                         <outlet property="imageView" destination="HYU-xN-1Es" id="LUW-7W-XPk"/>
+                        <outlet property="navBar" destination="6Hn-w0-pjA" id="bHD-nE-weJ"/>
                         <outlet property="scrollView" destination="qhp-O6-Nm3" id="Efs-dN-ubT"/>
                     </connections>
                 </viewController>
@@ -211,6 +213,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rpx-7F-vyq"/>
                     <connections>
+                        <outlet property="navBar" destination="rpx-7F-vyq" id="fFY-yv-I9l"/>
                         <outlet property="view" destination="LqF-zA-FDx" id="H70-zS-ioL"/>
                     </connections>
                 </viewController>
@@ -263,14 +266,21 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="PhotosFromPlaceViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosFromPlaceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationItem"/>
+            </relationships>
         </class>
         <class className="PlacesTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationItem"/>
+            </relationships>
         </class>
         <class className="RecentTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentTableViewController.h"/>

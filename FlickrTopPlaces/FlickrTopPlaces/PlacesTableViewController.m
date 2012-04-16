@@ -9,8 +9,12 @@
 #import "PlacesTableViewController.h"
 #import "PhotosFromPlaceViewController.h"
 
+@interface PlacesTableViewController()
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+@end
 
 @implementation PlacesTableViewController
+@synthesize navBar = _navBar;
 
 @synthesize topPlaces = _topPlaces;
 
@@ -98,6 +102,8 @@
     // initialize model
     PlacesModel * model = [[ PlacesModel alloc] init];
     self.topPlaces = model;
+    
+    self.navBar.title = @"Flickr Top Places";
     //
     // load data from flickr
     //
@@ -108,6 +114,7 @@
 
 - (void)viewDidUnload
 {
+    [self setNavBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -191,6 +198,7 @@
         //
         PhotosFromPlaceViewController *destViewController = segue.destinationViewController;
         destViewController.place = [self.topPlaces getPlaceParams:index ];
+        destViewController.title = [self.topPlaces getPlaceName:index ]; 
     }
 }
 

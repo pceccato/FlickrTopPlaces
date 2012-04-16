@@ -10,12 +10,20 @@
 #import "FlickrFetcher.h"
 #import "PhotoViewController.h"
 
-const int maxphotos = 40;
+const int maxphotos = 50;
+
+@interface PhotosFromPlaceViewController() 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (strong, nonatomic) NSString* title;
+
+@end
 
 @implementation PhotosFromPlaceViewController
+@synthesize navBar = _navBar;
 
 @synthesize place = _place;
 @synthesize photos = _photos;
+@synthesize title;
 
 
 //
@@ -76,6 +84,7 @@ const int maxphotos = 40;
     //
     // load data from flickr
     //
+    self.navBar.title = self.title;
     [ self loadPhotosForPlace ];
 }
 
@@ -92,6 +101,7 @@ const int maxphotos = 40;
     return [ self.photos count ];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PhotoCell";
@@ -102,24 +112,24 @@ const int maxphotos = 40;
     }
     
     NSDictionary* photo = [self.photos objectAtIndex:indexPath.row];
-    NSString* title = [photo objectForKey:FLICKR_PHOTO_TITLE ];
+    NSString* phototitle = [photo objectForKey:FLICKR_PHOTO_TITLE ];
     NSString* desc = [photo objectForKey:FLICKR_PHOTO_DESCRIPTION ];
-    if( [title length] == 0 )
+    if( [phototitle length] == 0 )
     {
         //
         // use description for title if title is blank
         //
-        title = desc;
+        phototitle = desc;
         desc = @"";
     }
-    if( [title length] == 0 )
+    if( [phototitle length] == 0 )
     {
         //
         // still no title
         //
-        title = @"Unknown";
+        phototitle = @"Unknown";
     }
-    cell.textLabel.text = title;
+    cell.textLabel.text = phototitle;
     cell.detailTextLabel.text = desc;
     return cell;
 }
@@ -138,8 +148,18 @@ const int maxphotos = 40;
         PhotoViewController *destViewController = segue.destinationViewController;
         NSDictionary* photo = [self.photos objectAtIndex: index];
         
+        //
+        // as well as the name of the photo from the tableview cell
+        //
+        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:selectedRowIndex];
+        destViewController.title = cell.textLabel.text;
+        
         destViewController.photo = photo;
     }
 }
 
+- (void)viewDidUnload {
+    [self setNavBar:nil];
+    [super viewDidUnload];
+}
 @end

@@ -13,11 +13,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+
 @end
 
 @implementation PhotoViewController
 @synthesize imageView;
 @synthesize scrollView;
+
+@synthesize navBar;
 @synthesize photo = _photo;
 
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -133,7 +137,6 @@
             
             [self.scrollView zoomToRect:zoomRect  animated:TRUE ];
             
-
             [av stopAnimating];
             [av removeFromSuperview];
         });
@@ -147,6 +150,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navBar.title = self.title;
     
     [self loadPhoto];
     
@@ -170,6 +175,7 @@
 {
     [self setImageView:nil];
     [self setScrollView:nil];
+    [self setNavBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

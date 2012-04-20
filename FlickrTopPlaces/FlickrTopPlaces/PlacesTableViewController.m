@@ -10,32 +10,12 @@
 #import "PhotosFromPlaceViewController.h"
 
 @interface PlacesTableViewController()
-@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+
 @end
 
 @implementation PlacesTableViewController
-@synthesize navBar = _navBar;
 
 @synthesize topPlaces = _topPlaces;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        
-
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -91,6 +71,7 @@
 
 - (void)viewDidLoad
 {
+    self.title = @"Flickr Top Places";
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -103,7 +84,7 @@
     PlacesModel * model = [[ PlacesModel alloc] init];
     self.topPlaces = model;
     
-    self.navBar.title = @"Flickr Top Places";
+
     //
     // load data from flickr
     //
@@ -114,37 +95,12 @@
 
 - (void)viewDidUnload
 {
-    [self setNavBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
 
 #pragma mark - Table view data source
 
@@ -174,16 +130,6 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

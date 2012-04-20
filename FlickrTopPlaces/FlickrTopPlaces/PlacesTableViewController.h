@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PlacesModel.h"
+#import "TitledTableViewController.h"
 
-@interface PlacesTableViewController : UITableViewController
+@interface PlacesTableViewController : TitledTableViewController
 
 @property (nonatomic,strong) PlacesModel* topPlaces;
 

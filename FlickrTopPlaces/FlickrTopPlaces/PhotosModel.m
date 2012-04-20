@@ -8,6 +8,12 @@
 
 #import "PhotosModel.h"
 
+@implementation PhotoInfo
+@synthesize title = _title;
+@synthesize description = _description;
+@synthesize photo_id = _photo_id;
+@end
+
 @implementation PhotosModel
 
 @end

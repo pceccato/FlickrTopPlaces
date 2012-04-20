@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotosModel.h"
+#import "PhotosTableViewController.h"
 
-@interface RecentTableViewController : UITableViewController
+@interface RecentTableViewController : PhotosTableViewController
+
 @property (nonatomic,strong) PhotosModel* recentPhotos;
+
 @end

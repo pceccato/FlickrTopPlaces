@@ -147,11 +147,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FlickrTopPlaces/PhotoViewController.m"
-         timestampString = "356227604.221823"
+         timestampString = "357113344.942245"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "-loadPhoto"
          landmarkType = "5">
       </FileBreakpoint>
@@ -161,11 +161,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FlickrTopPlaces/PhotoViewController.m"
-         timestampString = "356227604.221823"
+         timestampString = "357113344.942245"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "-loadPhoto"
          landmarkType = "5">
       </FileBreakpoint>
@@ -215,11 +215,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/PhotosTableViewController.m"
-         timestampString = "356590211.618359"
+         timestampString = "357113344.942245"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -228,11 +228,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/PhotosTableViewController.m"
-         timestampString = "356590211.618359"
+         timestampString = "357113344.942245"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>

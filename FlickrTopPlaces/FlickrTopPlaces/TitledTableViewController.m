@@ -8,13 +8,10 @@
 
 #import "TitledTableViewController.h"
 
-@interface TitledTableViewController ()
-@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
-@end
 
 @implementation TitledTableViewController
 
-@synthesize navBar = _navBar;
+
 @synthesize title;
 
 
@@ -22,11 +19,10 @@
 {
     [super viewDidLoad];
     if( [self.title length] != 0 )
-        self.navBar.title = self.title;
+        self.navigationItem.title = self.title;
 }
 
 - (void)viewDidUnload {
-    [self setNavBar:nil];
     [super viewDidUnload];
 }
 

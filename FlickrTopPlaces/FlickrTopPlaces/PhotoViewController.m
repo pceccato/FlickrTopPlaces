@@ -12,38 +12,17 @@
 @interface PhotoViewController() <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
-@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
-
 @end
 
 @implementation PhotoViewController
 @synthesize imageView;
 @synthesize scrollView;
 
-@synthesize navBar;
 @synthesize photo = _photo;
 
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void) loadPhoto
@@ -151,7 +130,7 @@
 {
     [super viewDidLoad];
     
-    self.navBar.title = self.title;
+    self.navigationItem.title = self.title;
     
     [self loadPhoto];
     
@@ -175,7 +154,6 @@
 {
     [self setImageView:nil];
     [self setScrollView:nil];
-    [self setNavBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

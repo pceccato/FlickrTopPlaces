@@ -10,6 +10,9 @@
 
 //
 // a table view controller that displays a title in the navbar
+// probably redundant unless we can add some more functionaltiy
+// as I just learned the view hasa navigationItem property so I do not need 
+// need to wire up the navbar explicitly
 //
 @interface TitledTableViewController : UITableViewController
 

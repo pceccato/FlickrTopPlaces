@@ -52,7 +52,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Nq3-cY-SGh"/>
                     <connections>
-                        <outlet property="navBar" destination="Nq3-cY-SGh" id="Vq8-LI-Usx"/>
                         <outlet property="view" destination="KJG-tr-XB1" id="iTQ-sS-Tyk"/>
                     </connections>
                 </tableViewController>
@@ -84,7 +83,6 @@
                     <navigationItem key="navigationItem" id="6Hn-w0-pjA"/>
                     <connections>
                         <outlet property="imageView" destination="HYU-xN-1Es" id="LUW-7W-XPk"/>
-                        <outlet property="navBar" destination="6Hn-w0-pjA" id="bHD-nE-weJ"/>
                         <outlet property="scrollView" destination="qhp-O6-Nm3" id="Efs-dN-ubT"/>
                     </connections>
                 </viewController>
@@ -140,7 +138,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="GA6-Ur-6K8"/>
                     <connections>
-                        <outlet property="navBar" destination="GA6-Ur-6K8" id="rqh-io-Rea"/>
                         <outlet property="view" destination="BLp-Wp-Xym" id="BiP-DZ-xMD"/>
                     </connections>
                 </viewController>
@@ -196,7 +193,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="rpx-7F-vyq"/>
                     <connections>
-                        <outlet property="navBar" destination="rpx-7F-vyq" id="fFY-yv-I9l"/>
                         <outlet property="view" destination="LqF-zA-FDx" id="H70-zS-ioL"/>
                     </connections>
                 </viewController>
@@ -267,7 +263,6 @@
                     <navigationItem key="navigationItem" id="05B-pk-qJ8"/>
                     <connections>
                         <outlet property="imageView" destination="LYe-Iw-iAQ" id="dGj-Jy-u76"/>
-                        <outlet property="navBar" destination="05B-pk-qJ8" id="g5r-Cd-SSg"/>
                         <outlet property="scrollView" destination="QfO-HI-7co" id="c4q-SE-3yL"/>
                     </connections>
                 </viewController>

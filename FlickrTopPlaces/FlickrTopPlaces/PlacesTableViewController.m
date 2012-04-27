@@ -56,15 +56,21 @@
         // refresh tableview then cancel the activity indicator
         //
         dispatch_async(dispatch_get_main_queue(), ^{
-            [ self.tableView reloadData ];
-            //
-            // can retrieve view like this
-            //
-            //UIActivityIndicatorView *tmpimg = (UIActivityIndicatorView *)[self.tableView viewWithTag:1];
-            //
-            // but we already have it
-            [av stopAnimating];
-            [av removeFromSuperview];
+            if( self.tableView.window )
+            {
+                //
+                // only if we are still on screen'
+                //
+                [ self.tableView reloadData ];
+                //
+                // can retrieve view like this
+                //
+                //UIActivityIndicatorView *tmpimg = (UIActivityIndicatorView *)[self.tableView viewWithTag:1];
+                //
+                // but we already have it
+                [av stopAnimating];
+                [av removeFromSuperview];
+            }
         });
     });
 }

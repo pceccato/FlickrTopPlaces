@@ -8,6 +8,7 @@
 
 #import "PhotoViewController.h"
 #import "FlickrFetcher.h"
+#import "ImageCache.h"
 
 @interface PhotoViewController() <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -48,76 +49,94 @@
             [self.scrollView addSubview:av ];
             [av startAnimating];
         });
-
+        
         //
-        // get the url for this photo and use it to create the UIimage
+        // first see if the photo is cached
         //
-        NSURL* url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
-        UIImage* image = [ UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        NSString* photo_id = [self.photo objectForKey:FLICKR_PHOTO_ID];
+        UIImage* image = [ ImageCache lookup:photo_id ];
+        if ( image == nil )
+        {
+            //
+            // not found... get the url for this photo and use it to create the UIimage
+            //
+            NSURL* url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
+            image = [ UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            //
+            // store it in the cache for next time
+            //
+            [ImageCache store:image withId:photo_id];
+        }
         
         //
         // update imageview then cancel activity indicator
         //
         dispatch_async(dispatch_get_main_queue(), ^{
-
-            self.imageView.image = image;
-            self.scrollView.contentSize = self.imageView.image.size;
-            //
-            // set the imageView to show the entire image
-            //
-            CGRect image = CGRectMake( 0, 0, self.imageView.image.size.width, self.imageView.image.size.height); 
-            self.imageView.frame = image;
-            //
-            // we want to have no unused space so the zoom rect must have the same aspect as the scrollviews frame
-            // so the shortest edge of the image should correspond to longest side of the frame
-            //
-            CGRect frame = self.scrollView.frame;
-            
-            float ratio = 0;
-            float scrollHeight = 0;
-            float scrollWidth = 0;
-            if( frame.size.width > frame.size.height )
+            if( self.imageView.window )
             {
-                // landscape frame
-                ratio = frame.size.height / frame.size.width;
-                if( image.size.width > image.size.height )
+                //
+                // only bother doing all this if we are still displayed on the screen
+                // the user my have navigated away
+                //
+                self.imageView.image = image;
+                self.scrollView.contentSize = self.imageView.image.size;
+                //
+                // set the imageView to show the entire image
+                //
+                CGRect image = CGRectMake( 0, 0, self.imageView.image.size.width, self.imageView.image.size.height); 
+                self.imageView.frame = image;
+                //
+                // we want to have no unused space so the zoom rect must have the same aspect as the scrollviews frame
+                // so the shortest edge of the image should correspond to longest side of the frame
+                //
+                CGRect frame = self.scrollView.frame;
+                
+                float ratio = 0;
+                float scrollHeight = 0;
+                float scrollWidth = 0;
+                if( frame.size.width > frame.size.height )
                 {
-                    // landscape image
-                    scrollWidth = image.size.width;
-                    scrollHeight = scrollWidth * ratio;
+                    // landscape frame
+                    ratio = frame.size.height / frame.size.width;
+                    if( image.size.width > image.size.height )
+                    {
+                        // landscape image
+                        scrollWidth = image.size.width;
+                        scrollHeight = scrollWidth * ratio;
+                    }
+                    else
+                    {
+                        // portrait image
+                        scrollWidth  = image.size.width;
+                        scrollHeight = scrollWidth * ratio;
+                    }
                 }
                 else
                 {
-                    // portrait image
-                    scrollWidth  = image.size.width;
-                    scrollHeight = scrollWidth * ratio;
+                    // portrait frame
+                    ratio = frame.size.width / frame.size.height;
+                    if( image.size.width > image.size.height )
+                    {
+                        // landscape image
+                        scrollHeight = image.size.height;
+                        scrollWidth = scrollHeight * ratio;
+                    }
+                    else
+                    {
+                        // portrait image
+                        scrollWidth  = image.size.width;
+                        scrollHeight = scrollWidth * ratio;
+                    }
                 }
-            }
-            else
-            {
-                // portrait frame
-                ratio = frame.size.width / frame.size.height;
-                if( image.size.width > image.size.height )
-                {
-                    // landscape image
-                    scrollHeight = image.size.height;
-                    scrollWidth = scrollHeight * ratio;
-                }
-                else
-                {
-                    // portrait image
-                    scrollWidth  = image.size.width;
-                    scrollHeight = scrollWidth * ratio;
-                }
-            }
 
-            CGRect zoomRect = CGRectMake( 0, 0, scrollWidth, scrollHeight);
-            
-            
-            [self.scrollView zoomToRect:zoomRect  animated:TRUE ];
-            
-            [av stopAnimating];
-            [av removeFromSuperview];
+                CGRect zoomRect = CGRectMake( 0, 0, scrollWidth, scrollHeight);
+                
+                
+                [self.scrollView zoomToRect:zoomRect  animated:TRUE ];
+                
+                [av stopAnimating];
+                [av removeFromSuperview];
+            }
         });
     });
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9F1D2B1C152DA14900F97646 /* PhotosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1D2B1B152DA14900F97646 /* PhotosModel.m */; };
 		9F1D2B1F152ECE7700F97646 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1D2B1E152ECE7700F97646 /* PhotosTableViewController.m */; };
+		9F207B34154A224C004199A4 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F207B33154A224C004199A4 /* ImageCache.m */; };
 		9F32A9591532798C00CE2E43 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F32A9581532798C00CE2E43 /* PhotoViewController.m */; };
 		9F44637B1525282600347BD4 /* PlacesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F44637A1525282600347BD4 /* PlacesModel.m */; };
 		9F5F49AE153E7A6200708E1E /* PhotosFromPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F49AD153E7A6200708E1E /* PhotosFromPlaceViewController.m */; };
@@ -31,6 +32,8 @@
 		9F1D2B1B152DA14900F97646 /* PhotosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosModel.m; sourceTree = "<group>"; };
 		9F1D2B1D152ECE7700F97646 /* PhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosTableViewController.h; sourceTree = "<group>"; };
 		9F1D2B1E152ECE7700F97646 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
+		9F207B32154A224C004199A4 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		9F207B33154A224C004199A4 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		9F32A9571532798C00CE2E43 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		9F32A9581532798C00CE2E43 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		9F4463791525282600347BD4 /* PlacesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesModel.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				9FCE27E6151AEE0A00600654 /* Supporting Files */,
 				9FA79ED5152422480036FC4D /* PlacesTableViewController.h */,
 				9FA79ED6152422480036FC4D /* PlacesTableViewController.m */,
+				9F207B32154A224C004199A4 /* ImageCache.h */,
+				9F207B33154A224C004199A4 /* ImageCache.m */,
 				9F4463791525282600347BD4 /* PlacesModel.h */,
 				9F44637A1525282600347BD4 /* PlacesModel.m */,
 				9FA79ED9152422700036FC4D /* RecentTableViewController.h */,
@@ -227,6 +232,7 @@
 				9F32A9591532798C00CE2E43 /* PhotoViewController.m in Sources */,
 				9F5F49AE153E7A6200708E1E /* PhotosFromPlaceViewController.m in Sources */,
 				9F83278C154120220096B6A3 /* TitledTableViewController.m in Sources */,
+				9F207B34154A224C004199A4 /* ImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

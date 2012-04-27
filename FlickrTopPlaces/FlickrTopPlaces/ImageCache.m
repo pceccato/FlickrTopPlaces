@@ -11,6 +11,7 @@
 
 
 const int maxCache = 10000000; 
+const NSString* CACHE_DIR = @"images";
 
 @implementation ImageCache
 
@@ -18,10 +19,13 @@ const int maxCache = 10000000;
 + (NSURL *)cachesDirectoryURL 
 {
     //
-    // TODO: make a subdir in here for caches so we can safely delete everything in it
+    // make a subdir in here for caches so we can safely delete everything in it
     //
     NSFileManager* fm = [[NSFileManager alloc] init];
-    return [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL* cachesURL = [[fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL* imagesURL = [ cachesURL URLByAppendingPathComponent:CACHE_DIR isDirectory:YES];  
+    [fm createDirectoryAtURL:imagesURL withIntermediateDirectories:YES attributes:nil error:nil];
+    return imagesURL;
 }
 
 + (NSURL *) getURL: (NSString*) image_id
@@ -29,10 +33,7 @@ const int maxCache = 10000000;
     //
     // build a URL to the image
     //
-    NSURL * directoryURL = [ ImageCache cachesDirectoryURL ];
-    NSURL* imageURL = [ NSURL URLWithString:image_id relativeToURL:directoryURL];  
-    
-    return imageURL;
+    return [ [ ImageCache cachesDirectoryURL ] URLByAppendingPathComponent:image_id ]; 
 }
      
 //
@@ -85,7 +86,7 @@ const int maxCache = 10000000;
             //
             // TODO: do we need to check for non files... we don't want to delete directories
             //
-            NSLog( @" %@ has date %@", thisURL, fileDate );
+            //           NSLog( @" %@ has date %@", thisURL, fileDate );
             if([fileDate compare:oldestDate] == NSOrderedAscending )
             {
                 oldestDate = fileDate;
@@ -107,9 +108,9 @@ const int maxCache = 10000000;
     // Enumerate the directory to determine file size and creation date (maybe we should use access date)
     // Ignore hidden files
     NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtURL:cacheURL
-                                    includingPropertiesForKeys:[NSArray arrayWithObjects:NSURLCreationDateKey,NSURLNameKey, NSURLTotalFileAllocatedSizeKey, nil]
+                                                includingPropertiesForKeys:[NSArray arrayWithObjects:NSURLCreationDateKey,                          NSURLTotalFileAllocatedSizeKey, nil]
                                                        options:NSDirectoryEnumerationSkipsHiddenFiles
-                                                  errorHandler:nil];
+                                                            errorHandler:nil];
     
     //
     // size of the directory
@@ -130,7 +131,7 @@ const int maxCache = 10000000;
             // we don't care about things with no size attribute (eg directories)
             //
             totalSize += [fileSize intValue];
-            NSLog( @" %@ has size %@", thisURL, fileSize );
+//            NSLog( @" %@ has size %@", thisURL, fileSize );
         }
     }
     NSLog( @"total size of cache %@", [NSNumber numberWithInt: totalSize]);

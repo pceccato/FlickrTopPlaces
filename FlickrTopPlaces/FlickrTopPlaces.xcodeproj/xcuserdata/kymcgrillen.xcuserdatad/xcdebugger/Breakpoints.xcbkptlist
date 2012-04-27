@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FlickrTopPlaces/PhotosFromPlaceViewController.m"
-         timestampString = "356439771.663118"
+         timestampString = "357230758.713202"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165">
+         startingLineNumber = "176"
+         endingLineNumber = "176">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -174,7 +174,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/PhotosFromPlaceViewController.m"
-         timestampString = "356418415.387516"
+         timestampString = "357230758.713202"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "107"
@@ -245,6 +245,45 @@
          startingLineNumber = "24"
          endingLineNumber = "24"
          landmarkName = "+cachesDirectoryURL"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FlickrTopPlaces/PhotosFromPlaceViewController.m"
+         timestampString = "357230758.713202"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FlickrTopPlaces/RecentTableViewController.m"
+         timestampString = "357230861.808195"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "@implementation RecentTableViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FlickrTopPlaces/RecentTableViewController.m"
+         timestampString = "357230867.018105"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
+         landmarkName = "-loadRecentPhotos"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

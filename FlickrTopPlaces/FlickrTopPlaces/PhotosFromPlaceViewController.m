@@ -105,6 +105,7 @@ const int maxphotos = 50;
         // grab the photo metadata put it in the recents list
         //
         NSDictionary* photo = [self.photos objectAtIndex: index];
+        NSString* photoID = [photo objectForKey:FLICKR_PHOTO_ID];
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
         
         //
@@ -112,9 +113,19 @@ const int maxphotos = 50;
         //
         NSMutableArray* recentPhotos = [NSMutableArray arrayWithArray:[defaults objectForKey:@"recentPhotos"]];
         //
-        // TODO: don't add duplicates
+        // don't add duplicates
         //
-        [recentPhotos addObject:photo];
+        bool isDuplicate = NO;
+        for (NSDictionary* recentPhoto in recentPhotos )
+        {
+            NSString* recentPhotoID = [recentPhoto objectForKey:FLICKR_PHOTO_ID];
+            if( [recentPhotoID isEqualToString:photoID] )
+                isDuplicate = YES;
+        }
+        //
+        // stick it at the front of the array so most recent photos will be at the top
+        if( !isDuplicate )
+            [recentPhotos insertObject:photo atIndex:0];
         
         //
         // save it

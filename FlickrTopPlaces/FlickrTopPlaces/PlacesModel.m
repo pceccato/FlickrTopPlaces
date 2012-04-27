@@ -101,7 +101,7 @@
     //
     // log it
     //
-    [ self logFlickrResponse ];
+    //[ self logFlickrResponse ];
         
 }
 

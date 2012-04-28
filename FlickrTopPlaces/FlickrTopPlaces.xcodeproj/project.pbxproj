@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F1418CF154C113600EAD7EE /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1418CE154C113600EAD7EE /* MapAnnotation.m */; };
 		9F1D2B1C152DA14900F97646 /* PhotosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1D2B1B152DA14900F97646 /* PhotosModel.m */; };
 		9F1D2B1F152ECE7700F97646 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1D2B1E152ECE7700F97646 /* PhotosTableViewController.m */; };
 		9F207B34154A224C004199A4 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F207B33154A224C004199A4 /* ImageCache.m */; };
+		9F207B38154BBBE0004199A4 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F207B37154BBBDF004199A4 /* MapViewController.m */; };
+		9F207B3A154BBC35004199A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F207B39154BBC35004199A4 /* MapKit.framework */; };
 		9F32A9591532798C00CE2E43 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F32A9581532798C00CE2E43 /* PhotoViewController.m */; };
 		9F44637B1525282600347BD4 /* PlacesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F44637A1525282600347BD4 /* PlacesModel.m */; };
 		9F5F49AE153E7A6200708E1E /* PhotosFromPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F49AD153E7A6200708E1E /* PhotosFromPlaceViewController.m */; };
@@ -28,12 +31,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F1418CD154C113500EAD7EE /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		9F1418CE154C113600EAD7EE /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		9F1D2B1A152DA14900F97646 /* PhotosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosModel.h; sourceTree = "<group>"; };
 		9F1D2B1B152DA14900F97646 /* PhotosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosModel.m; sourceTree = "<group>"; };
 		9F1D2B1D152ECE7700F97646 /* PhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosTableViewController.h; sourceTree = "<group>"; };
 		9F1D2B1E152ECE7700F97646 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
 		9F207B32154A224C004199A4 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		9F207B33154A224C004199A4 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
+		9F207B36154BBBDF004199A4 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		9F207B37154BBBDF004199A4 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		9F207B39154BBC35004199A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9F32A9571532798C00CE2E43 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		9F32A9581532798C00CE2E43 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		9F4463791525282600347BD4 /* PlacesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesModel.h; sourceTree = "<group>"; };
@@ -69,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F207B3A154BBC35004199A4 /* MapKit.framework in Frameworks */,
 				9FCE27E0151AEE0A00600654 /* UIKit.framework in Frameworks */,
 				9FCE27E2151AEE0A00600654 /* Foundation.framework in Frameworks */,
 				9FCE27E4151AEE0A00600654 /* CoreGraphics.framework in Frameworks */,
@@ -98,6 +107,7 @@
 		9FCE27DE151AEE0A00600654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F207B39154BBC35004199A4 /* MapKit.framework */,
 				9FCE27DF151AEE0A00600654 /* UIKit.framework */,
 				9FCE27E1151AEE0A00600654 /* Foundation.framework */,
 				9FCE27E3151AEE0A00600654 /* CoreGraphics.framework */,
@@ -110,6 +120,8 @@
 			children = (
 				9FCE27FC151AEE3700600654 /* FlickrFetcher */,
 				9FCE27F1151AEE0B00600654 /* MainStoryboard.storyboard */,
+				9F207B36154BBBDF004199A4 /* MapViewController.h */,
+				9F207B37154BBBDF004199A4 /* MapViewController.m */,
 				9F32A9571532798C00CE2E43 /* PhotoViewController.h */,
 				9F32A9581532798C00CE2E43 /* PhotoViewController.m */,
 				9FCE27F4151AEE0B00600654 /* PACViewController.h */,
@@ -131,6 +143,8 @@
 				9F5F49AD153E7A6200708E1E /* PhotosFromPlaceViewController.m */,
 				9F83278A154120220096B6A3 /* TitledTableViewController.h */,
 				9F83278B154120220096B6A3 /* TitledTableViewController.m */,
+				9F1418CD154C113500EAD7EE /* MapAnnotation.h */,
+				9F1418CE154C113600EAD7EE /* MapAnnotation.m */,
 			);
 			path = FlickrTopPlaces;
 			sourceTree = "<group>";
@@ -233,6 +247,8 @@
 				9F5F49AE153E7A6200708E1E /* PhotosFromPlaceViewController.m in Sources */,
 				9F83278C154120220096B6A3 /* TitledTableViewController.m in Sources */,
 				9F207B34154A224C004199A4 /* ImageCache.m in Sources */,
+				9F207B38154BBBE0004199A4 /* MapViewController.m in Sources */,
+				9F1418CF154C113600EAD7EE /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

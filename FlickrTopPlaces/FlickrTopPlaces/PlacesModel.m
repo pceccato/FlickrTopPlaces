@@ -18,26 +18,42 @@
 @property (nonatomic,strong) NSArray* topPlaces;
 @end
 
-//
-// this is used for our alphabetically sorted list of places
-//
-@interface PlaceDetail : NSObject
-@property (nonatomic,strong) NSString* name;
-@property (nonatomic,strong) NSString* details;
-@property (nonatomic,weak) NSDictionary* params;
-@end
-
-
 @implementation PlaceDetail
 @synthesize name = _name;
 @synthesize details = _details;
 @synthesize params = _params;
+@synthesize coordinate = _coordinate;
+
+-(id) initWithNameAndParams:(NSString*)name params:(NSDictionary*) p
+{
+    if(self = [super init])
+    {
+        //
+        // parse the name into place and details by splitting at the first comma found
+        //
+        NSRange searchRange;
+        searchRange.location=(unsigned int)',';
+        searchRange.length=1;
+        NSRange foundRange = [name rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
+        _name = [name substringToIndex:foundRange.location]; // string up to the first comma
+        _details = [name substringFromIndex:foundRange.location + 2]; // string up to the first comma
+        
+        _params = p;
+
+        NSNumber* longitude = [self.params objectForKey:FLICKR_LONGITUDE];
+        NSNumber* latitude  =  [self.params objectForKey:FLICKR_LATITUDE];
+
+        _coordinate.latitude = [latitude doubleValue];
+        _coordinate.longitude = [longitude doubleValue];
+    }
+    return self;
+}
+
 @end
 
 @implementation PlacesModel
 
 @synthesize sortedPlaces = _sortedPlaces;
-
 @synthesize topPlaces = _topPlaces;
 
 - (void) logFlickrResponse
@@ -58,32 +74,15 @@
     // make request to flickr
     //
     self.topPlaces = [ FlickrFetcher topPlaces ];
-
     
     //
     // now parse the place names and place details and put it into an array sorted by alphabetical order
     //
     NSMutableArray * places = [[ NSMutableArray alloc] init ];
     for(NSDictionary* place in self.topPlaces)
-    {
-        //
-        // place details are found under the content key
-        //
-        NSString* unparsedName = [place objectForKey:FLICKR_PLACE_NAME];
-        
-        //
-        // parse the name into place and details by splitting at the first comma found
-        //
-        NSRange searchRange;
-        searchRange.location=(unsigned int)',';
-        searchRange.length=1;
-        NSRange foundRange = [unparsedName rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
-        
-        PlaceDetail* d = [[PlaceDetail alloc] init];
-        d.name = [unparsedName substringToIndex:foundRange.location]; // string up to the first comma
-        d.details = [unparsedName substringFromIndex:foundRange.location + 2]; // string up to the first comma
-        d.params = place;
-        
+    {        
+        PlaceDetail* d = [[PlaceDetail alloc] initWithNameAndParams:[place objectForKey:FLICKR_PLACE_NAME] params:place ];
+
         //
         // put it into our temporary array
         //
@@ -123,23 +122,6 @@
         d =  [ self.sortedPlaces objectAtIndex:atIndex ];
     }
     return d; 
-}
-
-//
-// get the place name, usually its the first field separated by a comma
-//
--(NSString*) getPlaceName: (int) atIndex
-{
-    return [self getPlace:atIndex ].name;
-}
-
-
-//
-// the remaining place details found AFTER the first comma
-//
--(NSString*) getPlaceDetails: (int) atIndex
-{
-    return [self getPlace:atIndex ].details;   
 }
 
 -(NSDictionary*) getPlaceParams:(int)atIndex    

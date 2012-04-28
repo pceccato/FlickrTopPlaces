@@ -8,6 +8,7 @@
 
 #import "PlacesTableViewController.h"
 #import "PhotosFromPlaceViewController.h"
+#import "MapViewController.h"
 
 @interface PlacesTableViewController()
 
@@ -129,8 +130,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
         
-    cell.textLabel.text = [ self.topPlaces getPlaceName:indexPath.row ];
-    cell.detailTextLabel.text = [ self.topPlaces getPlaceDetails:indexPath.row ];
+    cell.textLabel.text = [ self.topPlaces getPlace:indexPath.row ].name;
+    cell.detailTextLabel.text = [ self.topPlaces getPlace:indexPath.row ].details;
     return cell;
 }
 
@@ -138,7 +139,7 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+        
     NSString* identifier = [segue identifier];
     if ([identifier isEqualToString:@"ShowPhotosFromPlace"]) {
         
@@ -149,8 +150,13 @@
         // tell the drill down what place to load the photos for
         //
         PhotosFromPlaceViewController *destViewController = segue.destinationViewController;
-        destViewController.place = [self.topPlaces getPlaceParams:index ];
-        destViewController.title = [self.topPlaces getPlaceName:index ]; 
+        destViewController.place = [self.topPlaces getPlace:index ].params;
+        destViewController.title = [self.topPlaces getPlace:index ].name; 
+    }
+    else if([identifier isEqualToString:@"PlacesMap"])
+    {
+        MapViewController* mapView = segue.destinationViewController;
+        mapView.places = self.topPlaces;
     }
 }
 

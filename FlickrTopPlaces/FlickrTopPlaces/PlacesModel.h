@@ -7,17 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
+//
+// this is used for our alphabetically sorted list of places
+//
+@interface PlaceDetail : NSObject
+@property (nonatomic,strong) NSString* name;
+@property (nonatomic,strong) NSString* details;
+@property (nonatomic,weak) NSDictionary* params;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
+
+-(id) initWithNameAndParams:(NSString*)name params:(NSDictionary*) p;
+@end
+
+
+//
+// TODO: make this guy directly enumerable?
+//
 @interface PlacesModel : NSObject
-
 
 -(void) loadFromFlickr;
 -(int) getNumPlaces;
-
--(NSString*) getPlaceName: (int) atIndex;
--(NSString*) getPlaceDetails: (int) atIndex;
--(NSDictionary*) getPlaceParams: (int) atIndex;
-
-
+-(PlaceDetail*) getPlace: (int) atIndex;
 
 @end

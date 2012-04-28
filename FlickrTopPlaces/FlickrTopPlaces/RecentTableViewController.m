@@ -15,7 +15,11 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    self.photos = [defaults objectForKey:@"recentPhotos"];
+    NSArray * recents = [defaults objectForKey:@"recentPhotos"];
+    
+    self.photos = recents;
+    
+    [self.tableView reloadData ];
 
 }
 
@@ -26,8 +30,6 @@
     //
     self.title = @"Recently Viewed";
     [super viewDidLoad];
-    
-
     [ self loadRecentPhotos ];
 }
 

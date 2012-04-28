@@ -225,19 +225,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FlickrTopPlaces/RecentTableViewController.m"
-         timestampString = "356587046.342006"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "30"
-         endingLineNumber = "30"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/ImageCache.m"
          timestampString = "357226834.899228"
          startingColumnNumber = "9223372036854775807"
@@ -248,7 +235,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/PhotosFromPlaceViewController.m"
@@ -265,11 +252,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/RecentTableViewController.m"
-         timestampString = "357230861.808195"
+         timestampString = "357284074.727452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
+         startingLineNumber = "39"
+         endingLineNumber = "39"
          landmarkName = "@implementation RecentTableViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -278,11 +265,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FlickrTopPlaces/RecentTableViewController.m"
-         timestampString = "357230867.018105"
+         timestampString = "357284074.727452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "18"
-         endingLineNumber = "18"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
          landmarkName = "-loadRecentPhotos"
          landmarkType = "5">
       </FileBreakpoint>

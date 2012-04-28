@@ -218,12 +218,12 @@
             </objects>
             <point key="canvasLocation" x="-219" y="-493"/>
         </scene>
-        <!--Navigation Controller - Places-->
+        <!--Navigation Controller-->
         <scene sceneID="Cd8-RQ-GbS">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzj-gq-srB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="RIf-Eq-bJg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Places" id="ERp-O0-b2b"/>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="ERp-O0-b2b"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="uSe-Z9-285"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fqR-ZO-mLF">
@@ -289,6 +289,33 @@
             <point key="canvasLocation" x="324" y="-110"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="PACViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PACViewController.h"/>
+        </class>
+        <class className="PhotoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="PhotosFromPlaceViewController" superclassName="PhotosTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosFromPlaceViewController.h"/>
+        </class>
+        <class className="PhotosTableViewController" superclassName="TitledTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTableViewController.h"/>
+        </class>
+        <class className="PlacesTableViewController" superclassName="TitledTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesTableViewController.h"/>
+        </class>
+        <class className="RecentTableViewController" superclassName="PhotosTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentTableViewController.h"/>
+        </class>
+        <class className="TitledTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitledTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

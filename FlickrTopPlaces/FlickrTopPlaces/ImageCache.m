@@ -8,6 +8,7 @@
 
 #import "ImageCache.h"
 #import "CoreData/CoreData.h"
+#import "FlickrFetcher.h"
 
 
 const int maxCache = 10000000; 
@@ -202,6 +203,28 @@ const NSString* CACHE_DIR = @"images";
     }
 }
 
++ (UIImage*) lookupAndFetchIfNotCached: (NSDictionary*) image_info withFormat: (FlickrPhotoFormat) f
+{
+    //
+    // first see if the photo is cached
+    //
+    NSString* image_id = [image_info objectForKey:FLICKR_PHOTO_ID];
+    UIImage* image = [ ImageCache lookup:image_id ];
+    if ( image == nil )
+    {
+        //
+        // not found... get the url for this photo and use it to create the UIimage
+        //
+        NSURL* url = [FlickrFetcher urlForPhoto:image_info format:f];
+        image = [ UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        
+        //
+        // store it in the cache for next time
+        //
+        [ImageCache store:image withId:image_id];
+    }
+    return image;
+}
 
 @end
 

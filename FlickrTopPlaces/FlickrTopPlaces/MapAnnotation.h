@@ -10,12 +10,35 @@
 #import <MapKit/MapKit.h>
 #import "PlacesModel.h"
 
-@interface MapAnnotation : NSObject<MKAnnotation>
+@interface PlaceMapAnnotation : NSObject<MKAnnotation>
 
-@property (readonly) CLLocationCoordinate2D coordinate;
-@property (readonly) NSString *title;
-@property (readonly) NSString *subtitle;
+// Center latitude and longitude of the annotion view.
+// The implementation of this property must be KVO compliant.
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
+// Title and subtitle for use by selection UI.
+@property (nonatomic, readonly, copy) NSString *title;
+@property (nonatomic, readonly, copy) NSString *subtitle;
+
+@property (nonatomic, readonly) NSDictionary* place;
 
 - (id) initWithPlace:(PlaceDetail*) place;
+
+@end
+
+@interface PhotoMapAnnotation : NSObject<MKAnnotation>
+
+// Center latitude and longitude of the annotion view.
+// The implementation of this property must be KVO compliant.
+//@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
+// Title and subtitle for use by selection UI.
+//@property (nonatomic, readonly, copy) NSString *title;
+//@property (nonatomic, readonly, copy) NSString *subtitle;
+
+@property (readonly) UIImage *image;
+@property (nonatomic, weak) NSDictionary * photoinfo;
+
+- (id) initWithPhoto:(NSDictionary*) photo;
 
 @end

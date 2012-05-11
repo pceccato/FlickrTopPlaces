@@ -16,6 +16,7 @@
 		9F32A9591532798C00CE2E43 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F32A9581532798C00CE2E43 /* PhotoViewController.m */; };
 		9F44637B1525282600347BD4 /* PlacesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F44637A1525282600347BD4 /* PlacesModel.m */; };
 		9F5F49AE153E7A6200708E1E /* PhotosFromPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F49AD153E7A6200708E1E /* PhotosFromPlaceViewController.m */; };
+		9F6CB149155C0E9C00E5D2F8 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CB148155C0E9C00E5D2F8 /* PhotoMapViewController.m */; };
 		9F83278C154120220096B6A3 /* TitledTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F83278B154120220096B6A3 /* TitledTableViewController.m */; };
 		9FA79ED7152422480036FC4D /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA79ED6152422480036FC4D /* PlacesTableViewController.m */; };
 		9FA79EDB152422700036FC4D /* RecentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA79EDA152422700036FC4D /* RecentTableViewController.m */; };
@@ -48,6 +49,8 @@
 		9F44637A1525282600347BD4 /* PlacesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesModel.m; sourceTree = "<group>"; };
 		9F5F49AC153E7A6200708E1E /* PhotosFromPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosFromPlaceViewController.h; sourceTree = "<group>"; };
 		9F5F49AD153E7A6200708E1E /* PhotosFromPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosFromPlaceViewController.m; sourceTree = "<group>"; };
+		9F6CB147155C0E9C00E5D2F8 /* PhotoMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMapViewController.h; sourceTree = "<group>"; };
+		9F6CB148155C0E9C00E5D2F8 /* PhotoMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoMapViewController.m; sourceTree = "<group>"; };
 		9F83278A154120220096B6A3 /* TitledTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitledTableViewController.h; sourceTree = "<group>"; };
 		9F83278B154120220096B6A3 /* TitledTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitledTableViewController.m; sourceTree = "<group>"; };
 		9FA79ED5152422480036FC4D /* PlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				9FCE27F1151AEE0B00600654 /* MainStoryboard.storyboard */,
 				9F207B36154BBBDF004199A4 /* MapViewController.h */,
 				9F207B37154BBBDF004199A4 /* MapViewController.m */,
+				9F6CB147155C0E9C00E5D2F8 /* PhotoMapViewController.h */,
+				9F6CB148155C0E9C00E5D2F8 /* PhotoMapViewController.m */,
 				9F32A9571532798C00CE2E43 /* PhotoViewController.h */,
 				9F32A9581532798C00CE2E43 /* PhotoViewController.m */,
 				9FCE27F4151AEE0B00600654 /* PACViewController.h */,
@@ -249,6 +254,7 @@
 				9F207B34154A224C004199A4 /* ImageCache.m in Sources */,
 				9F207B38154BBBE0004199A4 /* MapViewController.m in Sources */,
 				9F1418CF154C113600EAD7EE /* MapAnnotation.m in Sources */,
+				9F6CB149155C0E9C00E5D2F8 /* PhotoMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,10 +35,10 @@
         searchRange.location=(unsigned int)',';
         searchRange.length=1;
         NSRange foundRange = [name rangeOfCharacterFromSet:[NSCharacterSet characterSetWithRange:searchRange]];
-        _name = [name substringToIndex:foundRange.location]; // string up to the first comma
-        _details = [name substringFromIndex:foundRange.location + 2]; // string up to the first comma
+        self.name = [name substringToIndex:foundRange.location]; // string up to the first comma
+        self.details = [name substringFromIndex:foundRange.location + 2]; // string up to the first comma
         
-        _params = p;
+        self.params = p;
 
         NSNumber* longitude = [self.params objectForKey:FLICKR_LONGITUDE];
         NSNumber* latitude  =  [self.params objectForKey:FLICKR_LATITUDE];

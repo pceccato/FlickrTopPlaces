@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kBS-20-Wcl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kBS-20-Wcl">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -87,7 +87,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1604" y="-766"/>
+            <point key="canvasLocation" x="2288" y="-766"/>
         </scene>
         <!--Recent Table View Controller - Recently Viewed-->
         <scene sceneID="kQ3-hm-sFG">
@@ -214,7 +214,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="xij-Tz-x4q">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="xij-Tz-x4q">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
@@ -224,6 +224,7 @@
                     <navigationItem key="navigationItem" title="Top Places Map" id="8Vy-AG-P1J"/>
                     <connections>
                         <outlet property="mapView" destination="xij-Tz-x4q" id="Ej4-TN-pup"/>
+                        <segue destination="72Y-SM-gsz" kind="push" identifier="PhotoMap" id="6Si-Kd-Gyz"/>
                     </connections>
                 </viewController>
             </objects>
@@ -318,6 +319,31 @@
             </objects>
             <point key="canvasLocation" x="324" y="-110"/>
         </scene>
+        <!--Photo Map View Controller - Photo Map-->
+        <scene sceneID="h2O-Dk-QqI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5v-HD-4xp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="72Y-SM-gsz" customClass="PhotoMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZK6-wD-FvT">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="OxS-Uf-elu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo Map" id="UlG-k4-iWw"/>
+                    <connections>
+                        <outlet property="mapView" destination="OxS-Uf-elu" id="w4p-wA-nQA"/>
+                        <segue destination="Um0-0i-oOi" kind="push" identifier="ViewPhotoFromMap" id="N9v-vh-IS8"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1742" y="-1366"/>
+        </scene>
     </scenes>
     <classes>
         <class className="MapViewController" superclassName="UIViewController">
@@ -328,6 +354,12 @@
         </class>
         <class className="PACViewController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PACViewController.h"/>
+        </class>
+        <class className="PhotoMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
         </class>
         <class className="PhotoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
@@ -357,4 +389,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="N9v-vh-IS8"/>
+    </inferredMetricsTieBreakers>
 </document>

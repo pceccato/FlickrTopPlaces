@@ -9,8 +9,9 @@
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
 #import "MapAnnotation.h"
+#import "PhotoMapViewController.h"
 
-@interface MapViewController ()
+@interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, atomic) NSArray* placeAnnotations;
 @end
@@ -20,27 +21,29 @@
 @synthesize mapView = _mapView;
 @synthesize placeAnnotations = _placeAnnotations;
 
-- (NSArray*) generateAnnotations: (PlacesModel*) places
+
+- (NSArray*) generateAnnotations
 {
     NSMutableArray* annotations = [[NSMutableArray alloc] init];
 
-    for( int i = 0; i < [places getNumPlaces]; i++)
+    for( int i = 0; i < [self.places getNumPlaces]; i++)
     {
-        MapAnnotation* a = [[MapAnnotation alloc] initWithPlace:[places getPlace:i] ];
+        PlaceMapAnnotation* a = [[PlaceMapAnnotation alloc] initWithPlace:[self.places getPlace:i] ];
         [annotations addObject:a];        
     }
-    return annotations; 
-    
+    return annotations;     
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.mapView.delegate = self;
 	
     //
     // add annotations to the map
     //
-    self.placeAnnotations = [ self generateAnnotations:self.places ];
+    self.placeAnnotations = [ self generateAnnotations ];
     [self.mapView addAnnotations:self.placeAnnotations];
     
     //
@@ -50,7 +53,7 @@
         
     double  minlong = 0, maxlong = 0, minlat = 0, maxlat = 0;
     
-    for( MapAnnotation* a in self.placeAnnotations )
+    for( PlaceMapAnnotation* a in self.placeAnnotations )
     {
         
         if( a.coordinate.latitude > maxlat)
@@ -61,6 +64,7 @@
         
         if( a.coordinate.longitude > maxlong )
             maxlong = a.coordinate.longitude;
+        
         if( a.coordinate.longitude < minlong )
             minlong = a.coordinate.longitude;
                 
@@ -74,7 +78,7 @@
     r.span.longitudeDelta = maxlong - minlong;
     
     [self.mapView setRegion:r];
-   
+    self.mapView.delegate = self;
     
 }
 
@@ -87,6 +91,66 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    MKAnnotationView *aView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapVC"];
+    if (!aView) 
+    {
+        aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
+        aView.canShowCallout = YES;
+        
+        //
+        // UIButton for the drilldown
+        //
+        UIButton* button = [UIButton buttonWithType: UIButtonTypeDetailDisclosure]; 
+        button.frame    = CGRectMake(0, 0, 30, 30);
+        
+        aView.rightCalloutAccessoryView = button;
+
+        
+    }
+    
+    aView.annotation = annotation;
+    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
+    
+    return aView;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
+{
+    UIImage *image = nil; //[self.delegate mapViewController:self imageForAnnotation:aView.annotation];
+    
+    [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
+    //
+    // do the drilldown here...
+    //
+    [self performSegueWithIdentifier:@"PhotoMap" sender:view.annotation];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSString* identifier = [segue identifier];
+    if ([identifier isEqualToString:@"PhotoMap"]) 
+    {
+        PlaceMapAnnotation * a = sender;
+        PhotoMapViewController *destViewController = segue.destinationViewController;
+        
+        //
+        // pass the place metadata to the photo map view so it can load all the photos from the place
+        //
+//        destViewController.title = a.title;
+        NSDictionary* place = a.place;
+        destViewController.place = place;
+    }
 }
 
 @end

@@ -51,22 +51,9 @@
         });
         
         //
-        // first see if the photo is cached
+        // get the photo from the cache, if not cached then request from flickr
         //
-        NSString* photo_id = [self.photo objectForKey:FLICKR_PHOTO_ID];
-        UIImage* image = [ ImageCache lookup:photo_id ];
-        if ( image == nil )
-        {
-            //
-            // not found... get the url for this photo and use it to create the UIimage
-            //
-            NSURL* url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
-            image = [ UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-            //
-            // store it in the cache for next time
-            //
-            [ImageCache store:image withId:photo_id];
-        }
+        UIImage* image = [ ImageCache lookupAndFetchIfNotCached:self.photo withFormat:FlickrPhotoFormatLarge ];
         
         //
         // update imageview then cancel activity indicator

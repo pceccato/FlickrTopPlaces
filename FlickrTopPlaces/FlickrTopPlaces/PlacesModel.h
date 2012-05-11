@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSString* details;
 @property (nonatomic,weak) NSDictionary* params;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
+@property (nonatomic,strong) NSString* photo_id;
 
 -(id) initWithNameAndParams:(NSString*)name params:(NSDictionary*) p;
 @end

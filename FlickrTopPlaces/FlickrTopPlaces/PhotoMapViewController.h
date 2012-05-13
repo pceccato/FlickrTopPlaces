@@ -26,4 +26,8 @@
 //
 @property (nonatomic,strong) NSDictionary* place;
 @property (nonatomic, weak) id <PhotoMapViewControllerDelegate> delegate;
+//
+// photos loaded from place... if this is nil then we need to load from flickr
+//
+@property (strong, atomic) NSArray* photos;
 @end

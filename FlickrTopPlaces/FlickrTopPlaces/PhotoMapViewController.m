@@ -16,7 +16,7 @@
 @interface PhotoMapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, atomic) NSArray* annotations;
-@property (strong, atomic) NSArray* photos;
+
 @end
 
 @implementation PhotoMapViewController
@@ -57,13 +57,17 @@
             
             [self.mapView addSubview:av ];
             [av startAnimating];
+            [self updateMapView];
         });        
         
         
         //
-        // reuest photos from place from flickr
+        // request photos from place from flickr if we don't have them
         //
-        self.photos = [ FlickrFetcher photosInPlace:self.place maxResults:50 ]; 
+        if( !self.photos )
+        {
+            self.photos = [ FlickrFetcher photosInPlace:self.place maxResults:50 ]; 
+        }
         //
         // convert them into annotations
         //
@@ -73,18 +77,12 @@
         // anything which updates the UI can only be doen from main thread
         //
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            //
-            // add annotations to the map
-            //
-            [self updateMapView];
-            
             //
             // find centre of all annotations and determine the region we should display
             //
             MKCoordinateRegion r;
             
-            double  minlong = 0, maxlong = 0, minlat = 0, maxlat = 0;
+            double  minlong = 180, maxlong = -180, minlat = 90, maxlat = -90;
             
             for( PhotoMapAnnotation* a in self.annotations )
             {
@@ -104,13 +102,20 @@
             
             //
             // average centre... perhaps
-            r.center.latitude = maxlat + minlat; 
-            r.center.longitude = maxlong +minlong; 
-            r.span.latitudeDelta = maxlat - minlat;
-            r.span.longitudeDelta = maxlong - minlong;
+            r.center.latitude = (maxlat + minlat)/2; 
+            r.center.longitude = (maxlong +minlong)/2; 
+            //
+            // pad by 5 %
+            //
+            r.span.latitudeDelta = (maxlat - minlat) * 1.05;
+            r.span.longitudeDelta = (maxlong - minlong) * 1.05;
             
             [self.mapView setRegion:r];
             self.mapView.delegate = self;
+            //
+            // add annotations to the map
+            //
+            [self updateMapView];
             
             [av stopAnimating];
             [av removeFromSuperview];

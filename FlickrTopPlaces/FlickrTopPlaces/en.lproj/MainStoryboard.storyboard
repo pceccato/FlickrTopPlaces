@@ -12,7 +12,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cPO-Vf-hIs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="52e-LN-XUG" customClass="PhotosFromPlaceViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KJG-tr-XB1">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -50,13 +50,21 @@
                             <outlet property="delegate" destination="52e-LN-XUG" id="CMe-H1-Sj1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Nq3-cY-SGh"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Nq3-cY-SGh">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="msP-8j-N2q">
+                            <connections>
+                                <segue destination="72Y-SM-gsz" kind="push" identifier="PhotoTableToMap" id="R4h-MS-hx4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="view" destination="KJG-tr-XB1" id="iTQ-sS-Tyk"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1262" y="-771"/>
+            <point key="canvasLocation" x="1328" y="-759"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="e5r-e7-pB6">
@@ -64,15 +72,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m7a-hv-QX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Um0-0i-oOi" customClass="PhotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LtS-M8-oLs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.20000000000000001" id="qhp-O6-Nm3">
-                                <rect key="frame" x="-20" y="-20" width="360" height="407"/>
+                                <rect key="frame" x="-20" y="-20" width="360" height="412"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="TopLeft" id="HYU-xN-1Es">
-                                        <rect key="frame" x="20" y="20" width="320" height="367"/>
+                                        <rect key="frame" x="20" y="20" width="320" height="372"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -87,7 +95,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2288" y="-766"/>
+            <point key="canvasLocation" x="2401" y="-759"/>
         </scene>
         <!--Recent Table View Controller - Recently Viewed-->
         <scene sceneID="kQ3-hm-sFG">
@@ -325,11 +333,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5v-HD-4xp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="72Y-SM-gsz" customClass="PhotoMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZK6-wD-FvT">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="OxS-Uf-elu">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
@@ -342,54 +350,16 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1742" y="-1366"/>
+            <point key="canvasLocation" x="1865" y="-1377"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="PACViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PACViewController.h"/>
-        </class>
-        <class className="PhotoMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="PhotoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="PhotosFromPlaceViewController" superclassName="PhotosTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosFromPlaceViewController.h"/>
-        </class>
-        <class className="PhotosTableViewController" superclassName="TitledTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTableViewController.h"/>
-        </class>
-        <class className="PlacesTableViewController" superclassName="TitledTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesTableViewController.h"/>
-        </class>
-        <class className="RecentTableViewController" superclassName="PhotosTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentTableViewController.h"/>
-        </class>
-        <class className="TitledTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitledTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="R4h-MS-hx4"/>
         <segue reference="N9v-vh-IS8"/>
     </inferredMetricsTieBreakers>
 </document>

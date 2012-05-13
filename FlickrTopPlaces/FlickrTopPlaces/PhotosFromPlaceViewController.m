@@ -8,6 +8,7 @@
 
 #import "PhotosFromPlaceViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotoMapViewController.h"
 
 const int maxphotos = 50;
 
@@ -134,6 +135,18 @@ const int maxphotos = 50;
         [defaults synchronize];
 
     }
+    if ([identifier isEqualToString:@"PhotoTableToMap"]) {
+
+        PhotoMapViewController *destViewController = segue.destinationViewController;
+        
+        //
+        // pass the place metadata to the photo map view so it can load all the photos from this place
+        // TODO: should probably cache
+        //
+        destViewController.place = self.place;
+        destViewController.photos = self.photos;
+    }
+
 }
 
 @end

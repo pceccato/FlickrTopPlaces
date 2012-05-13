@@ -51,7 +51,7 @@
     //
     MKCoordinateRegion r;
         
-    double  minlong = 0, maxlong = 0, minlat = 0, maxlat = 0;
+    double  minlong = 180, maxlong = -180, minlat = 90, maxlat = -90;
     
     for( PlaceMapAnnotation* a in self.placeAnnotations )
     {
@@ -72,10 +72,10 @@
     
     //
     // average centre... perhaps
-    r.center.latitude = maxlat + minlat; 
-    r.center.longitude = maxlong +minlong; 
-    r.span.latitudeDelta = maxlat - minlat;
-    r.span.longitudeDelta = maxlong - minlong;
+    r.center.latitude = (maxlat + minlat)/2; 
+    r.center.longitude = (maxlong +minlong)/2; 
+    r.span.latitudeDelta = (maxlat - minlat) *1.05;
+    r.span.longitudeDelta = (maxlong - minlong) *1.05;
     
     [self.mapView setRegion:r];
     self.mapView.delegate = self;
